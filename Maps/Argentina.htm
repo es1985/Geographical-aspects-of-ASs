@@ -1,0 +1,2684 @@
+<!DOCTYPE html> 
+ <html> 
+ <head> 
+ <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+ <meta charset="utf-8"> 
+ <style type="text/css">  
+ html { height: 100% ; font-size: small} 
+ body { height: 100%; margin: 0px; padding: 0px }
+ #map_canvas {min-height: 100%;height:auto; } 
+ #cBoxes {position:absolute;right:5px; top:50px; background:white}
+</style> 
+
+ <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"> </script>  
+
+ <script language="javascript"> 
+  
+ USGSOverlay.prototype = new google.maps.OverlayView(); 
+function USGSOverlay(bounds, image, map) {
+      this.bounds_ = bounds;
+      this.image_ = image;
+      this.map_ = map;
+      this.div_ = null;
+      this.setMap(map); }
+USGSOverlay.prototype.onAdd = function() {
+      var div = document.createElement("DIV");
+      div.style.border = "none";
+      div.style.borderWidth = "0px";
+      div.style.position = "absolute";
+      var img = document.createElement("img");
+      img.src = this.image_;
+      img.style.width = "100%";
+      img.style.height = "100%";
+      div.appendChild(img);
+      this.div_ = div;
+      this.div_.style.opacity = 0.7;
+      var panes = this.getPanes();
+      panes.overlayImage.appendChild(this.div_);}
+USGSOverlay.prototype.draw = function() {
+        var overlayProjection = this.getProjection();
+        var sw = overlayProjection.fromLatLngToDivPixel(this.bounds_.getSouthWest());
+        var ne = overlayProjection.fromLatLngToDivPixel(this.bounds_.getNorthEast());
+        var div = this.div_;
+        div.style.left = sw.x + "px";
+        div.style.top = ne.y + "px";
+        div.style.width = (ne.x - sw.x) + "px";
+        div.style.height = (sw.y - ne.y) + "px";} 
+USGSOverlay.prototype.onRemove = function() { 
+ this.div_.parentNode.removeChild(this.div_);} 
+USGSOverlay.prototype.hide = function() { if (this.div_) { this.div_.style.visibility = "hidden";} } 
+USGSOverlay.prototype.show = function() {if (this.div_) {  this.div_.style.visibility = "visible";}} 
+       USGSOverlay.prototype.toggle = function() { 
+ if (this.div_) { 
+  if (this.div_.style.visibility == "hidden") {  
+   this.show(); 
+  } else { 
+  this.hide(); } } } 
+ USGSOverlay.prototype.toggleDOM = function() {
+          if (this.getMap()) {
+            this.setMap(null);
+          } else {
+            this.setMap(this.map_);}}
+ function setOpacR(Raster,textname) { 
+  opac=0.01*parseInt(document.getElementById(textname).value) 
+    Raster.div_.style.opacity= opac } 
+
+ var marker 
+ var  map  
+ var  markerstemp2060 =[] ; var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 676 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1990-05-23 \rname : United Nations Development Programme \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 3449 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1994-02-17 \rname : Universidad Nacional de Buenos Aires \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 4270 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1995-01-18 \rname : Red de Interconexion Universitaria \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 4926 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1995-05-08 \rname : Telefonica de Argentina \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.921501,-57.954498),
+ map:map,
+ title:"cl$cluster : 3 \rid : 5692 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1995-09-06 \rname : Universidad Nacional de La Plata \rIP_prefix_counter : 1 \rcity :  La Plata \rcountry : AR \rmax_latitude : -34.921501 \rmax_longtitude : -57.954498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 7005 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1996-07-24 \rname : InterServer SA \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.746498,-63.097599),
+ map:map,
+ title:"cl$cluster : 4 \rid : 7340 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1996-11-13 \rname : TELETEL \rIP_prefix_counter : 1 \rcity :  Viamonte \rcountry : AR \rmax_latitude : -33.746498 \rmax_longtitude : -63.097599 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.9188,-66.324203),
+ map:map,
+ title:"cl$cluster : 4 \rid : 7417 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1996-12-05 \rname : Ministry of Economy \rIP_prefix_counter : 1 \rcity :  Hipolito Yrigoyen \rcountry : AR \rmax_latitude : -32.9188 \rmax_longtitude : -66.324203 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 10671 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1997-10-21 \rname : Comision Nacional de Actividades Espaciales \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-30.954599,-58.783298),
+ map:map,
+ title:"cl$cluster : 1 \rid : 10964 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-02-17 \rname : Red Cooperativa de Comunicaciones \rIP_prefix_counter : 1 \rcity :  Federal \rcountry : AR \rmax_latitude : -30.954599 \rmax_longtitude : -58.783298 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.921501,-57.954498),
+ map:map,
+ title:"cl$cluster : 3 \rid : 11008 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-03-05 \rname : Netverk S.A. \rIP_prefix_counter : 1 \rcity :  La Plata \rcountry : AR \rmax_latitude : -34.921501 \rmax_longtitude : -57.954498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 11193 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-05-12 \rname : COMNET S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.533401,-58.509399),
+ map:map,
+ title:"cl$cluster : 3 \rid : 11311 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-06-24 \rname : Sinectis S.A. \rIP_prefix_counter : 1 \rcity :  Florida \rcountry : AR \rmax_latitude : -34.533401 \rmax_longtitude : -58.509399 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 11315 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-06-25 \rname : Telefónica Móviles Argentina S.A. (Movista \rIP_prefix_counter : 7 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-30.954599,-58.783298),
+ map:map,
+ title:"cl$cluster : 1 \rid : 11392 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1998-08-03 \rname : Nosis Laboratorio de Investigación y Desarr \rIP_prefix_counter : 1 \rcity :  Federal \rcountry : AR \rmax_latitude : -30.954599 \rmax_longtitude : -58.783298 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 13316 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1999-04-14 \rname : SES Sistemas Electrónicos S.A. \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 13474 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 1999-06-16 \rname : Banco de Galicia y Buenos Aires \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.719601,-62.2724),
+ map:map,
+ title:"cl$cluster : 2 \rid : 14845 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2000-02-15 \rname : Universidad Nacional del Sur \rIP_prefix_counter : 1 \rcity :  Bahia Blanca \rcountry : AR \rmax_latitude : -38.719601 \rmax_longtitude : -62.2724 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 15034 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2000-03-10 \rname : TIBA S.A. \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 16701 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2000-05-19 \rname : ADMINISTRACION FEDERAL DE INGRESOS PUBLICOS( \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 17069 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2000-07-19 \rname : Cooperativa Telefnica y Otros Servicios deVi \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 17401 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2000-08-28 \rname : ERTACH S.A. \rIP_prefix_counter : 5 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.4501,-58.7878),
+ map:map,
+ title:"cl$cluster : 3 \rid : 19889 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-02-27 \rname : Cooperativa Telefonica Del Viso \rIP_prefix_counter : 5 \rcity :  Del Viso \rcountry : AR \rmax_latitude : -34.4501 \rmax_longtitude : -58.7878 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 21590 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-05-25 \rname : Telecom Argentina S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.168701,-58.959099),
+ map:map,
+ title:"cl$cluster : 3 \rid : 21756 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-06-15 \rname : SIDERCA S.A.I.C. \rIP_prefix_counter : 1 \rcity :  Campana \rcountry : AR \rmax_latitude : -34.168701 \rmax_longtitude : -58.959099 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 22080 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-08-02 \rname : Broadbandtech S. A. \rIP_prefix_counter : 3 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 22185 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-08-17 \rname : TELEFONICA-UNIDAD LARGA DISTANCIA \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.0023,-57.557499),
+ map:map,
+ title:"cl$cluster : 5 \rid : 22501 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-10-08 \rname : Cooperativa Telefonica Carlos Tejedor Ltda. \rIP_prefix_counter : 2 \rcity :  Mar Del Plata \rcountry : AR \rmax_latitude : -38.0023 \rmax_longtitude : -57.557499 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|5"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 22678 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2001-11-02 \rname : OSDE \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 26593 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2002-09-05 \rname : Telespazio Argentina \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27655 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2003-08-12 \rname : YPF S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27674 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2004-11-16 \rname : SERVICIO METEOROLOGICO NACIONAL \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27691 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2004-01-05 \rname : Velconet SA \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27692 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2004-11-29 \rname : GIRE S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27744 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2004-06-03 \rname : Tecoar SA \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27754 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2004-12-29 \rname : Cooperativa Batan de Obras y Serv. Publicos \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27756 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-02-10 \rname : Servicio Satelital S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27769 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-05-20 \rname : DSR Comunicaciones S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.130699,-64.349899),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27770 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-05-25 \rname : Universidad Nacional de Rio Cuarto \rIP_prefix_counter : 1 \rcity :  Rio Cuarto \rcountry : AR \rmax_latitude : -33.130699 \rmax_longtitude : -64.349899 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27779 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-07-26 \rname : Darcom S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.629499,-60.701),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27787 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-09-23 \rname : TRC Comunicaciones SRL \rIP_prefix_counter : 1 \rcity :  Santa Fe \rcountry : AR \rmax_latitude : -31.629499 \rmax_longtitude : -60.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.4135,-64.181099),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27790 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2005-10-06 \rname : Universidad Nacional de Cordoba \rIP_prefix_counter : 1 \rcity :  Cordoba \rcountry : AR \rmax_latitude : -31.4135 \rmax_longtitude : -64.181099 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.9468,-60.639301),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27823 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-05-12 \rname : Dattatec.com \rIP_prefix_counter : 2 \rcity :  Rosario \rcountry : AR \rmax_latitude : -32.9468 \rmax_longtitude : -60.639301 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.629499,-60.701),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27827 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-05-30 \rname : Gualberto Larrauri \rIP_prefix_counter : 2 \rcity :  Santa Fe \rcountry : AR \rmax_latitude : -31.629499 \rmax_longtitude : -60.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27830 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-06-05 \rname : Pan American Energy LLC \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.570301,-59.105),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27851 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-09-20 \rname : Coop. Eléctrica y de Servicios Públicos Lu \rIP_prefix_counter : 1 \rcity :  Lujan \rcountry : AR \rmax_latitude : -34.570301 \rmax_longtitude : -59.105 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27865 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-10-17 \rname : Tecnologia WorkOut S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.724201,-58.252602),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27870 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-11-10 \rname : CSCOM \rIP_prefix_counter : 1 \rcity :  Quilmes \rcountry : AR \rmax_latitude : -34.724201 \rmax_longtitude : -58.252602 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27871 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2006-11-28 \rname : NEXTEL COMMUNICATIONS ARGENTINA S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.822601,-60.718498),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27877 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-01-18 \rname : Coop. Telefonica de Capitán Bermúdez \rIP_prefix_counter : 3 \rcity :  Capitan Bermudez \rcountry : AR \rmax_latitude : -32.822601 \rmax_longtitude : -60.718498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.8908,-68.827202),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27879 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-02-01 \rname : Informática y Telecomunicaciones S.A. \rIP_prefix_counter : 1 \rcity :  Mendoza \rcountry : AR \rmax_latitude : -32.8908 \rmax_longtitude : -68.827202 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27883 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-03-02 \rname : Universidad Tecnologica Nacional \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.081001,-68.468102),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27898 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-04-24 \rname : Redynet SRL \rIP_prefix_counter : 1 \rcity :  San Martin \rcountry : AR \rmax_latitude : -33.081001 \rmax_longtitude : -68.468102 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.9468,-60.639301),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27907 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-05-31 \rname : Neoris Argentina S.A \rIP_prefix_counter : 1 \rcity :  Rosario \rcountry : AR \rmax_latitude : -32.9468 \rmax_longtitude : -60.639301 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-36.616699,-64.283302),
+ map:map,
+ title:"cl$cluster : 2 \rid : 27927 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-08-29 \rname : Coop. Popular de Elec., Obras y Servicios Pu \rIP_prefix_counter : 4 \rcity :  Santa Rosa \rcountry : AR \rmax_latitude : -36.616699 \rmax_longtitude : -64.283302 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27934 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-10-09 \rname : JSNet S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-30.981501,-64.0942),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27940 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2007-10-30 \rname : Cooperativa Colonia Caroya \rIP_prefix_counter : 2 \rcity :  Jesus Maria \rcountry : AR \rmax_latitude : -30.981501 \rmax_longtitude : -64.0942 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27949 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-01-14 \rname : ANSES - Administración Nacional de la Segur \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.411301,-58.701401),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27950 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-01-16 \rname : Cooperativa Telefonica Benavidez Ltda \rIP_prefix_counter : 1 \rcity :  Benavidez \rcountry : AR \rmax_latitude : -34.411301 \rmax_longtitude : -58.701401 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27954 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-01-30 \rname : FARMALINK S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.4697,-58.759201),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27955 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-01-30 \rname : Cooperativa de Provisión de Servicios Publi \rIP_prefix_counter : 3 \rcity :  Tortuguitas \rcountry : AR \rmax_latitude : -34.4697 \rmax_longtitude : -58.759201 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27969 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-04-25 \rname : BairesWeb \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-29.232,-61.769199),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27971 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-05-21 \rname : Alberto Oscar Genovese \rIP_prefix_counter : 2 \rcity :  Tostado \rcountry : AR \rmax_latitude : -29.232 \rmax_longtitude : -61.769199 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27980 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-07-03 \rname : Weatherford International Inc. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.0023,-57.557499),
+ map:map,
+ title:"cl$cluster : 5 \rid : 27981 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-07-03 \rname : Universidad Nacional de Mar del Plata \rIP_prefix_counter : 1 \rcity :  Mar Del Plata \rcountry : AR \rmax_latitude : -38.0023 \rmax_longtitude : -57.557499 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|5"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27988 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-08-11 \rname : Servicios y Telecomunicaciones S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.629499,-60.701),
+ map:map,
+ title:"cl$cluster : 1 \rid : 27993 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-08-29 \rname : Universidad Nacional del Litoral \rIP_prefix_counter : 1 \rcity :  Santa Fe \rcountry : AR \rmax_latitude : -31.629499 \rmax_longtitude : -60.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 27994 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-09-08 \rname : Servicios para el Transporte de Información \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.840401,-64.375801),
+ map:map,
+ title:"cl$cluster : 4 \rid : 27997 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-09-11 \rname : Coop. Ltda de Electricidad y Servicios Anexo \rIP_prefix_counter : 2 \rcity :  Huinca Renanco \rcountry : AR \rmax_latitude : -34.840401 \rmax_longtitude : -64.375801 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.951599,-68.059097),
+ map:map,
+ title:"cl$cluster : 2 \rid : 28009 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-10-20 \rname : Davitel S.A. \rIP_prefix_counter : 3 \rcity :  Neuquen \rcountry : AR \rmax_latitude : -38.951599 \rmax_longtitude : -68.059097 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28020 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-11-28 \rname : Municipalidad de Rosario \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.652901,-64.428299),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28026 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-12-23 \rname : Grape S.A. \rIP_prefix_counter : 1 \rcity :  Alta Gracia \rcountry : AR \rmax_latitude : -31.652901 \rmax_longtitude : -64.428299 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28028 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2008-12-30 \rname : FastBee Argentina S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.098099,-59.028599),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28034 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-01-26 \rname : Toyota Argentina S.A. \rIP_prefix_counter : 1 \rcity :  Zarate \rcountry : AR \rmax_latitude : -34.098099 \rmax_longtitude : -59.028599 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28037 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-02-02 \rname : Alpha 2000 Soluciones Infomaticas SRL \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.294998,-66.335602),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28038 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-02-11 \rname : SAN LUIS CTV S.A. \rIP_prefix_counter : 5 \rcity :  San Luis \rcountry : AR \rmax_latitude : -33.294998 \rmax_longtitude : -66.335602 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-29.410999,-66.8507),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28048 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-03-31 \rname : Internet Para Todos - Gobierno de La Rioja \rIP_prefix_counter : 3 \rcity :  La Rioja \rcountry : AR \rmax_latitude : -29.410999 \rmax_longtitude : -66.8507 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.597401,-59.177799),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28051 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-04-06 \rname : Coop. Telefónica y de obras y serv. públic \rIP_prefix_counter : 1 \rcity :  Jauregui \rcountry : AR \rmax_latitude : -34.597401 \rmax_longtitude : -59.177799 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.921501,-57.954498),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28065 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-07-03 \rname : CITARELLA S.A. \rIP_prefix_counter : 1 \rcity :  La Plata \rcountry : AR \rmax_latitude : -34.921501 \rmax_longtitude : -57.954498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.294998,-66.335602),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28068 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-07-22 \rname : Universidad Nacional de San Luis \rIP_prefix_counter : 1 \rcity :  San Luis \rcountry : AR \rmax_latitude : -33.294998 \rmax_longtitude : -66.335602 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.8908,-68.827202),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28075 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-08-04 \rname : ARLINK S.A. \rIP_prefix_counter : 3 \rcity :  Mendoza \rcountry : AR \rmax_latitude : -32.8908 \rmax_longtitude : -68.827202 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.5375,-68.5364),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28080 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-08-26 \rname : Interredes S.A. \rIP_prefix_counter : 1 \rcity :  San Juan \rcountry : AR \rmax_latitude : -31.5375 \rmax_longtitude : -68.5364 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28090 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-11-04 \rname : Elektra de Argentina S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.4202,-63.049999),
+ map:map,
+ title:"cl$cluster : 1 \rid : 28093 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-11-04 \rname : Cooperativa de Electricidad y Servicios Publ \rIP_prefix_counter : 2 \rcity :  Arroyito \rcountry : AR \rmax_latitude : -31.4202 \rmax_longtitude : -63.049999 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.556601,-63.5345),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28100 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-11-30 \rname : Cooperativa Villa del Rosario (Coovilros) \rIP_prefix_counter : 2 \rcity :  Villa Del Rosario \rcountry : AR \rmax_latitude : -31.556601 \rmax_longtitude : -63.5345 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 28101 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-12-01 \rname : NC IT SRL \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.5375,-68.5364),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28107 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2009-12-14 \rname : UNIVERSIDAD NACIONAL DE SAN JUAN \rIP_prefix_counter : 2 \rcity :  San Juan \rcountry : AR \rmax_latitude : -31.5375 \rmax_longtitude : -68.5364 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 28117 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-02-10 \rname : Crisil Irevna Argentina S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.921501,-57.954498),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52235 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-04-09 \rname : NetLP SRL \rIP_prefix_counter : 1 \rcity :  La Plata \rcountry : AR \rmax_latitude : -34.921501 \rmax_longtitude : -57.954498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.471401,-58.507801),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52239 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-04-28 \rname : Desarrollos Digitales de Pulsar Consulting \rIP_prefix_counter : 1 \rcity :  San Isidro \rcountry : AR \rmax_latitude : -34.471401 \rmax_longtitude : -58.507801 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52240 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-04-23 \rname : Ministerio de Trabajo, Empleo y Seguridad So \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.583801,-60.943298),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52255 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-06-07 \rname : Grupo Servicios Junin S.A. \rIP_prefix_counter : 1 \rcity :  Junin \rcountry : AR \rmax_latitude : -34.583801 \rmax_longtitude : -60.943298 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.872101,-62.719501),
+ map:map,
+ title:"cl$cluster : 1 \rid : 52271 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-08-12 \rname : Coop. Energía Elect. y Otros Servicios Las \rIP_prefix_counter : 1 \rcity :  Las Varillas \rcountry : AR \rmax_latitude : -31.872101 \rmax_longtitude : -62.719501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-37.4547,-61.933399),
+ map:map,
+ title:"cl$cluster : 2 \rid : 52273 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-08-19 \rname : Loop Coronel Suarez S.A. \rIP_prefix_counter : 1 \rcity :  Coronel Suarez \rcountry : AR \rmax_latitude : -37.4547 \rmax_longtitude : -61.933399 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52275 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-08-20 \rname : Anura S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52283 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-10-13 \rname : Aginet SA \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52290 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-10-21 \rname : PCCP S.A. \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.951599,-68.059097),
+ map:map,
+ title:"cl$cluster : 2 \rid : 52291 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-10-27 \rname : Coop. Provincia de Serv. Publicos y Comunita \rIP_prefix_counter : 1 \rcity :  Neuquen \rcountry : AR \rmax_latitude : -38.951599 \rmax_longtitude : -68.059097 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 52293 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-11-03 \rname : Gobierno de Santa Fe \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-27.920401,-63.893501),
+ map:map,
+ title:"cl$cluster : 1 \rid : 52295 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-11-11 \rname : Coop Eléctrica, Serv Publicos, Vivienda Jua \rIP_prefix_counter : 1 \rcity :  Fernandez \rcountry : AR \rmax_latitude : -27.920401 \rmax_longtitude : -63.893501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.629499,-60.701),
+ map:map,
+ title:"cl$cluster : 1 \rid : 52296 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-11-18 \rname : Trynet S.R.L. \rIP_prefix_counter : 1 \rcity :  Santa Fe \rcountry : AR \rmax_latitude : -31.629499 \rmax_longtitude : -60.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-35.0518,-58.760601),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52300 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-12-02 \rname : Internet Local \rIP_prefix_counter : 1 \rcity :  Canuelas \rcountry : AR \rmax_latitude : -35.0518 \rmax_longtitude : -58.760601 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.4135,-64.181099),
+ map:map,
+ title:"cl$cluster : 4 \rid : 52303 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2010-12-23 \rname : COOP.DE OB.Y SERVICIOS PUB. DE MARCOS JUAREZ \rIP_prefix_counter : 1 \rcity :  Cordoba \rcountry : AR \rmax_latitude : -31.4135 \rmax_longtitude : -64.181099 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.583801,-60.943298),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52314 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-02-07 \rname : Universidad Nacional del Noroeste de Buenos \rIP_prefix_counter : 2 \rcity :  Junin \rcountry : AR \rmax_latitude : -34.583801 \rmax_longtitude : -60.943298 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.921501,-57.954498),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52317 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-03-10 \rname : Internet Winds AG \rIP_prefix_counter : 1 \rcity :  La Plata \rcountry : AR \rmax_latitude : -34.921501 \rmax_longtitude : -57.954498 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52318 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-03-11 \rname : Agencia de Sistemas de Informacion, Gobierno \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.4135,-64.181099),
+ map:map,
+ title:"cl$cluster : 4 \rid : 52321 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-04-18 \rname : Fideicomiso de Administración Datacenter Ca \rIP_prefix_counter : 1 \rcity :  Cordoba \rcountry : AR \rmax_latitude : -31.4135 \rmax_longtitude : -64.181099 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-39.083302,-67.233299),
+ map:map,
+ title:"cl$cluster : 2 \rid : 52322 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-05-04 \rname : TELCOCOM \rIP_prefix_counter : 1 \rcity :  Ingeniero Huergo \rcountry : AR \rmax_latitude : -39.083302 \rmax_longtitude : -67.233299 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|2"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.087898,-61.790001),
+ map:map,
+ title:"cl$cluster : 1 \rid : 52328 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-06-15 \rname : CABLETEL SA \rIP_prefix_counter : 1 \rcity :  Arteaga \rcountry : AR \rmax_latitude : -33.087898 \rmax_longtitude : -61.790001 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.098099,-59.028599),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52339 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-08-15 \rname : Lima Video Cable S.A. (Cabletel) \rIP_prefix_counter : 3 \rcity :  Zarate \rcountry : AR \rmax_latitude : -34.098099 \rmax_longtitude : -59.028599 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52346 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-09-20 \rname : Diveo Argentina \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-35.201302,-59.3437),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52348 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-10-18 \rname : Cooperativa Eléctrica Antonio Carboni Ltda \rIP_prefix_counter : 2 \rcity :  Carboni \rcountry : AR \rmax_latitude : -35.201302 \rmax_longtitude : -59.3437 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52349 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-10-19 \rname : Young S.A. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.77,-59.689602),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52350 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-10-26 \rname : Cooperativa de Electricidad, Obras y Servici \rIP_prefix_counter : 1 \rcity :  Suipacha \rcountry : AR \rmax_latitude : -34.77 \rmax_longtitude : -59.689602 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-30.944,-61.561501),
+ map:map,
+ title:"cl$cluster : 1 \rid : 52351 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-10-31 \rname : Integral Insumos \rIP_prefix_counter : 1 \rcity :  Sunchales \rcountry : AR \rmax_latitude : -30.944 \rmax_longtitude : -61.561501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-36.7243,-56.677101),
+ map:map,
+ title:"cl$cluster : 5 \rid : 52352 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-11-01 \rname : TVC5 S.A. \rIP_prefix_counter : 1 \rcity :  Mar De Ajo \rcountry : AR \rmax_latitude : -36.7243 \rmax_longtitude : -56.677101 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|5"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-36.541302,-56.701),
+ map:map,
+ title:"cl$cluster : 5 \rid : 52354 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-11-18 \rname : Atlantica Video Cable S.A. \rIP_prefix_counter : 1 \rcity :  Santa Teresita \rcountry : AR \rmax_latitude : -36.541302 \rmax_longtitude : -56.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|5"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52357 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-01-05 \rname : INTERSERVICES MANAGEMENT COMPANY Ltd. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 52361 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-02-29 \rname : ARSAT - Empresa Argentina de Soluciones Sate \rIP_prefix_counter : 2 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52363 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-03-09 \rname : Jumpnet Soluciones de Internet S.R.L. \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.2929,-60.254601),
+ map:map,
+ title:"cl$cluster : 3 \rid : 52367 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-03-20 \rname : COOP. LIMITADA DE CONSUMO DE ELECTRICIDAD DE \rIP_prefix_counter : 1 \rcity :  Salto \rcountry : AR \rmax_latitude : -34.2929 \rmax_longtitude : -60.254601 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-32.756599,-63.786098),
+ map:map,
+ title:"cl$cluster : 4 \rid : 52372 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-05-24 \rname : COOPERATIVA ELECTRICA DE GENERAL DEHEZA LTDA \rIP_prefix_counter : 2 \rcity :  General Deheza \rcountry : AR \rmax_latitude : -32.756599 \rmax_longtitude : -63.786098 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 262170 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-07-19 \rname : Visualhosting.net \rIP_prefix_counter : 2 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 262174 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-08-08 \rname : NEURALSOFT S.R.L. \rIP_prefix_counter : 2 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.629499,-60.701),
+ map:map,
+ title:"cl$cluster : 1 \rid : 262189 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-09-27 \rname : Cooperativa Regional de Servicios \rIP_prefix_counter : 1 \rcity :  Santa Fe \rcountry : AR \rmax_latitude : -31.629499 \rmax_longtitude : -60.701 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|1"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 262192 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-11-22 \rname : Skycorp S.A. \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34,-64),
+ map:map,
+ title:"cl$cluster : 4 \rid : 262201 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2011-11-24 \rname : BANCO HIPOTECARIO SOCIEDAD ANONIMA \rIP_prefix_counter : 1 \rcity :  N/A \rcountry : AR \rmax_latitude : -34 \rmax_longtitude : -64 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|7FEE00|10|b|4"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.587502,-58.672501),
+ map:map,
+ title:"cl$cluster : 3 \rid : 262216 \rreg_country : AR \rregistry : lacnic \rdate_of_registration : 2012-02-02 \rname : TELCONET S A \rIP_prefix_counter : 1 \rcity :  Buenos Aires \rcountry : AR \rmax_latitude : -34.587502 \rmax_longtitude : -58.672501 \rdistance : 0 \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|00FF00|10|b|3"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-31.453093375,-61.115774875),
+ map:map,
+ title:"cl$cluster : 100 \rid : NA \rreg_country : NA \rregistry : NA \rdate_of_registration : NA \rname : NA \rIP_prefix_counter : NA \rcity : NA \rcountry : NA \rmax_latitude : -31.453093375 \rmax_longtitude : -61.115774875 \rdistance : NA \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|100"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-38.29625,-65.3067656666667),
+ map:map,
+ title:"cl$cluster : 200 \rid : NA \rreg_country : NA \rregistry : NA \rdate_of_registration : NA \rname : NA \rIP_prefix_counter : NA \rcity : NA \rcountry : NA \rmax_latitude : -38.29625 \rmax_longtitude : -65.3067656666667 \rdistance : NA \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|200"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-34.59935778125,-58.7620301875),
+ map:map,
+ title:"cl$cluster : 300 \rid : NA \rreg_country : NA \rregistry : NA \rdate_of_registration : NA \rname : NA \rIP_prefix_counter : NA \rcity : NA \rcountry : NA \rmax_latitude : -34.59935778125 \rmax_longtitude : -58.7620301875 \rdistance : NA \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|300"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-33.1516604210526,-64.8750291052632),
+ map:map,
+ title:"cl$cluster : 400 \rid : NA \rreg_country : NA \rregistry : NA \rdate_of_registration : NA \rname : NA \rIP_prefix_counter : NA \rcity : NA \rcountry : NA \rmax_latitude : -33.1516604210526 \rmax_longtitude : -64.8750291052632 \rdistance : NA \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|400"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+var  marker = new google.maps.Marker({ 
+ position: new google.maps.LatLng(-37.3175505,-57.12327475),
+ map:map,
+ title:"cl$cluster : 500 \rid : NA \rreg_country : NA \rregistry : NA \rdate_of_registration : NA \rname : NA \rIP_prefix_counter : NA \rcity : NA \rcountry : NA \rmax_latitude : -37.3175505 \rmax_longtitude : -57.12327475 \rdistance : NA \r",
+ clickable: true,
+ draggable: false,
+ flat: true,
+ visible: true,
+ icon: new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_spin&chld=0.6|0|B0DB00|10|b|500"), 
+  zIndex: null }); 
+markerstemp2060.push(marker); 
+
+function showR(R,boxname, map) {
+  R.setMap(map);
+  document.getElementById(boxname).checked = true; }
+
+function hideR(R,boxname) {
+R.setMap(null);
+document.getElementById(boxname).checked = false; }
+
+function showO(MLPArray,boxname, map ) { 
+for (var i = 0; i < MLPArray.length; i++) { 
+MLPArray[i].setMap(map); } 
+document.getElementById(boxname).checked = true; }
+
+function hideO(MLPArray,boxname) { 
+for (var i = 0; i < MLPArray.length; i++) { 
+MLPArray[i].setMap(null);} 
+document.getElementById(boxname).checked = false; } 
+
+function boxclick(box,MLPArray,boxname, map) { 
+if (box.checked) { showO(MLPArray,boxname, map); 
+}else {  hideO(MLPArray,boxname);} }
+
+function setOpac(MLPArray,textname){
+opacity=0.01*parseInt(document.getElementById(textname).value) 
+for(var i = 0; i < MLPArray.length; i++) {
+MLPArray[i].setOptions({strokeOpacity: opacity, fillOpacity: opacity}); }}
+
+function setOpacL(MLPArray,textname) {
+opacity=0.01*parseInt(document.getElementById(textname).value) 
+for (var i = 0; i < MLPArray.length; i++) {
+MLPArray[i].setOptions({strokeOpacity: opacity});}}
+
+function setLineWeight(MLPArray,textnameW){
+weight=parseInt(document.getElementById(textnameW).value)
+for (var i = 0; i < MLPArray.length; i++){
+MLPArray[i].setOptions({strokeWeight: weight}); } }
+
+function legendDisplay(box,divLegendImage){
+element = document.getElementById(divLegendImage).style;
+if (box.checked){ element.display="block";} else {  element.display="none";}}
+
+function boxclickR(box,R,boxname, map) {
+if (box.checked){
+showR(R,boxname,map); } else { hideR(R,boxname);} }
+
+function legendDisplay(box,divLegendImage){
+element = document.getElementById(divLegendImage).style; 
+if (box.checked){ element.display="block";} else {  element.display="none";}}  
+ function initialize() { 
+ var latlng = new google.maps.LatLng( -33.5018515 , -62.7521515 ) ; 
+ 
+ var myOptions = { zoom: 15 , 
+ center: latlng , 
+ mapTypeId: google.maps.MapTypeId.ROADMAP  ,
+ disableDefaultUI: false  ,
+ disableDoubleClickZoom: false  ,
+  draggable: true  ,
+  keyboardShortcuts:  true  ,
+ mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DEFAULT}  ,
+  navigationControl: true  ,
+ navigationControlOptions: {style: google.maps.NavigationControlStyle.DEFAULT}  ,
+ noClear: false  ,
+ scaleControl: true  ,
+ scaleControlOptions: {style: google.maps.ScaleControlStyle.STANDARD}  ,
+  scrollwheel: true  ,
+ streetViewControl: false } ; 
+ 
+ map= new google.maps.Map(document.getElementById("map_canvas"),myOptions); 
+ map.fitBounds(new google.maps.LatLngBounds(
+ new google.maps.LatLng(-39.083302,-68.827202),
+ new google.maps.LatLng( -27.920401,-56.677101)));   var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[0] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 676 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1990-05-23 <br>name : United Nations Development Programme <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[0] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[1] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 3449 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1994-02-17 <br>name : Universidad Nacional de Buenos Aires <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[1] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[2] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 4270 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1995-01-18 <br>name : Red de Interconexion Universitaria <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[2] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[3] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 4926 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1995-05-08 <br>name : Telefonica de Argentina <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[3] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[4] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 5692 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1995-09-06 <br>name : Universidad Nacional de La Plata <br>IP_prefix_counter : 1 <br>city :  La Plata <br>country : AR <br>max_latitude : -34.921501 <br>max_longtitude : -57.954498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[4] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[5] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 7005 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1996-07-24 <br>name : InterServer SA <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[5] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[6] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 7340 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1996-11-13 <br>name : TELETEL <br>IP_prefix_counter : 1 <br>city :  Viamonte <br>country : AR <br>max_latitude : -33.746498 <br>max_longtitude : -63.097599 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[6] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[7] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 7417 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1996-12-05 <br>name : Ministry of Economy <br>IP_prefix_counter : 1 <br>city :  Hipolito Yrigoyen <br>country : AR <br>max_latitude : -32.9188 <br>max_longtitude : -66.324203 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[7] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[8] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 10671 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1997-10-21 <br>name : Comision Nacional de Actividades Espaciales <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[8] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[9] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 10964 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-02-17 <br>name : Red Cooperativa de Comunicaciones <br>IP_prefix_counter : 1 <br>city :  Federal <br>country : AR <br>max_latitude : -30.954599 <br>max_longtitude : -58.783298 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[9] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[10] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 11008 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-03-05 <br>name : Netverk S.A. <br>IP_prefix_counter : 1 <br>city :  La Plata <br>country : AR <br>max_latitude : -34.921501 <br>max_longtitude : -57.954498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[10] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[11] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 11193 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-05-12 <br>name : COMNET S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[11] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[12] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 11311 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-06-24 <br>name : Sinectis S.A. <br>IP_prefix_counter : 1 <br>city :  Florida <br>country : AR <br>max_latitude : -34.533401 <br>max_longtitude : -58.509399 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[12] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[13] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 11315 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-06-25 <br>name : Telefónica Móviles Argentina S.A. (Movista <br>IP_prefix_counter : 7 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[13] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[14] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 11392 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1998-08-03 <br>name : Nosis Laboratorio de Investigación y Desarr <br>IP_prefix_counter : 1 <br>city :  Federal <br>country : AR <br>max_latitude : -30.954599 <br>max_longtitude : -58.783298 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[14] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[15] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 13316 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1999-04-14 <br>name : SES Sistemas Electrónicos S.A. <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[15] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[16] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 13474 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 1999-06-16 <br>name : Banco de Galicia y Buenos Aires <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[16] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[17] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 14845 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2000-02-15 <br>name : Universidad Nacional del Sur <br>IP_prefix_counter : 1 <br>city :  Bahia Blanca <br>country : AR <br>max_latitude : -38.719601 <br>max_longtitude : -62.2724 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[17] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[18] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 15034 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2000-03-10 <br>name : TIBA S.A. <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[18] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[19] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 16701 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2000-05-19 <br>name : ADMINISTRACION FEDERAL DE INGRESOS PUBLICOS( <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[19] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[20] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 17069 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2000-07-19 <br>name : Cooperativa Telefnica y Otros Servicios deVi <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[20] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[21] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 17401 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2000-08-28 <br>name : ERTACH S.A. <br>IP_prefix_counter : 5 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[21] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[22] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 19889 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-02-27 <br>name : Cooperativa Telefonica Del Viso <br>IP_prefix_counter : 5 <br>city :  Del Viso <br>country : AR <br>max_latitude : -34.4501 <br>max_longtitude : -58.7878 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[22] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[23] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 21590 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-05-25 <br>name : Telecom Argentina S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[23] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[24] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 21756 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-06-15 <br>name : SIDERCA S.A.I.C. <br>IP_prefix_counter : 1 <br>city :  Campana <br>country : AR <br>max_latitude : -34.168701 <br>max_longtitude : -58.959099 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[24] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[25] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 22080 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-08-02 <br>name : Broadbandtech S. A. <br>IP_prefix_counter : 3 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[25] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[26] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 22185 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-08-17 <br>name : TELEFONICA-UNIDAD LARGA DISTANCIA <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[26] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[27] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 5 <br>id : 22501 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-10-08 <br>name : Cooperativa Telefonica Carlos Tejedor Ltda. <br>IP_prefix_counter : 2 <br>city :  Mar Del Plata <br>country : AR <br>max_latitude : -38.0023 <br>max_longtitude : -57.557499 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[27] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[28] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 22678 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2001-11-02 <br>name : OSDE <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[28] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[29] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 26593 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2002-09-05 <br>name : Telespazio Argentina <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[29] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[30] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27655 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2003-08-12 <br>name : YPF S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[30] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[31] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27674 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2004-11-16 <br>name : SERVICIO METEOROLOGICO NACIONAL <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[31] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[32] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27691 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2004-01-05 <br>name : Velconet SA <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[32] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[33] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27692 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2004-11-29 <br>name : GIRE S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[33] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[34] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27744 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2004-06-03 <br>name : Tecoar SA <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[34] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[35] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27754 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2004-12-29 <br>name : Cooperativa Batan de Obras y Serv. Publicos <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[35] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[36] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27756 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-02-10 <br>name : Servicio Satelital S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[36] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[37] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27769 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-05-20 <br>name : DSR Comunicaciones S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[37] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[38] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27770 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-05-25 <br>name : Universidad Nacional de Rio Cuarto <br>IP_prefix_counter : 1 <br>city :  Rio Cuarto <br>country : AR <br>max_latitude : -33.130699 <br>max_longtitude : -64.349899 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[38] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[39] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27779 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-07-26 <br>name : Darcom S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[39] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[40] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27787 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-09-23 <br>name : TRC Comunicaciones SRL <br>IP_prefix_counter : 1 <br>city :  Santa Fe <br>country : AR <br>max_latitude : -31.629499 <br>max_longtitude : -60.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[40] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[41] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27790 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2005-10-06 <br>name : Universidad Nacional de Cordoba <br>IP_prefix_counter : 1 <br>city :  Cordoba <br>country : AR <br>max_latitude : -31.4135 <br>max_longtitude : -64.181099 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[41] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[42] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27823 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-05-12 <br>name : Dattatec.com <br>IP_prefix_counter : 2 <br>city :  Rosario <br>country : AR <br>max_latitude : -32.9468 <br>max_longtitude : -60.639301 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[42] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[43] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27827 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-05-30 <br>name : Gualberto Larrauri <br>IP_prefix_counter : 2 <br>city :  Santa Fe <br>country : AR <br>max_latitude : -31.629499 <br>max_longtitude : -60.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[43] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[44] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27830 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-06-05 <br>name : Pan American Energy LLC <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[44] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[45] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27851 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-09-20 <br>name : Coop. Eléctrica y de Servicios Públicos Lu <br>IP_prefix_counter : 1 <br>city :  Lujan <br>country : AR <br>max_latitude : -34.570301 <br>max_longtitude : -59.105 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[45] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[46] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27865 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-10-17 <br>name : Tecnologia WorkOut S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[46] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[47] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27870 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-11-10 <br>name : CSCOM <br>IP_prefix_counter : 1 <br>city :  Quilmes <br>country : AR <br>max_latitude : -34.724201 <br>max_longtitude : -58.252602 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[47] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[48] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27871 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2006-11-28 <br>name : NEXTEL COMMUNICATIONS ARGENTINA S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[48] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[49] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27877 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-01-18 <br>name : Coop. Telefonica de Capitán Bermúdez <br>IP_prefix_counter : 3 <br>city :  Capitan Bermudez <br>country : AR <br>max_latitude : -32.822601 <br>max_longtitude : -60.718498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[49] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[50] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27879 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-02-01 <br>name : Informática y Telecomunicaciones S.A. <br>IP_prefix_counter : 1 <br>city :  Mendoza <br>country : AR <br>max_latitude : -32.8908 <br>max_longtitude : -68.827202 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[50] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[51] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27883 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-03-02 <br>name : Universidad Tecnologica Nacional <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[51] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[52] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27898 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-04-24 <br>name : Redynet SRL <br>IP_prefix_counter : 1 <br>city :  San Martin <br>country : AR <br>max_latitude : -33.081001 <br>max_longtitude : -68.468102 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[52] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[53] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27907 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-05-31 <br>name : Neoris Argentina S.A <br>IP_prefix_counter : 1 <br>city :  Rosario <br>country : AR <br>max_latitude : -32.9468 <br>max_longtitude : -60.639301 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[53] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[54] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 27927 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-08-29 <br>name : Coop. Popular de Elec., Obras y Servicios Pu <br>IP_prefix_counter : 4 <br>city :  Santa Rosa <br>country : AR <br>max_latitude : -36.616699 <br>max_longtitude : -64.283302 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[54] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[55] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27934 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-10-09 <br>name : JSNet S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[55] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[56] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27940 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2007-10-30 <br>name : Cooperativa Colonia Caroya <br>IP_prefix_counter : 2 <br>city :  Jesus Maria <br>country : AR <br>max_latitude : -30.981501 <br>max_longtitude : -64.0942 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[56] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[57] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27949 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-01-14 <br>name : ANSES - Administración Nacional de la Segur <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[57] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[58] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27950 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-01-16 <br>name : Cooperativa Telefonica Benavidez Ltda <br>IP_prefix_counter : 1 <br>city :  Benavidez <br>country : AR <br>max_latitude : -34.411301 <br>max_longtitude : -58.701401 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[58] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[59] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27954 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-01-30 <br>name : FARMALINK S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[59] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[60] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27955 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-01-30 <br>name : Cooperativa de Provisión de Servicios Publi <br>IP_prefix_counter : 3 <br>city :  Tortuguitas <br>country : AR <br>max_latitude : -34.4697 <br>max_longtitude : -58.759201 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[60] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[61] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27969 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-04-25 <br>name : BairesWeb <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[61] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[62] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27971 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-05-21 <br>name : Alberto Oscar Genovese <br>IP_prefix_counter : 2 <br>city :  Tostado <br>country : AR <br>max_latitude : -29.232 <br>max_longtitude : -61.769199 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[62] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[63] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27980 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-07-03 <br>name : Weatherford International Inc. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[63] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[64] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 5 <br>id : 27981 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-07-03 <br>name : Universidad Nacional de Mar del Plata <br>IP_prefix_counter : 1 <br>city :  Mar Del Plata <br>country : AR <br>max_latitude : -38.0023 <br>max_longtitude : -57.557499 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[64] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[65] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27988 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-08-11 <br>name : Servicios y Telecomunicaciones S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[65] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[66] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 27993 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-08-29 <br>name : Universidad Nacional del Litoral <br>IP_prefix_counter : 1 <br>city :  Santa Fe <br>country : AR <br>max_latitude : -31.629499 <br>max_longtitude : -60.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[66] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[67] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 27994 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-09-08 <br>name : Servicios para el Transporte de Información <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[67] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[68] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 27997 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-09-11 <br>name : Coop. Ltda de Electricidad y Servicios Anexo <br>IP_prefix_counter : 2 <br>city :  Huinca Renanco <br>country : AR <br>max_latitude : -34.840401 <br>max_longtitude : -64.375801 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[68] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[69] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 28009 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-10-20 <br>name : Davitel S.A. <br>IP_prefix_counter : 3 <br>city :  Neuquen <br>country : AR <br>max_latitude : -38.951599 <br>max_longtitude : -68.059097 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[69] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[70] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28020 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-11-28 <br>name : Municipalidad de Rosario <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[70] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[71] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28026 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-12-23 <br>name : Grape S.A. <br>IP_prefix_counter : 1 <br>city :  Alta Gracia <br>country : AR <br>max_latitude : -31.652901 <br>max_longtitude : -64.428299 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[71] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[72] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28028 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2008-12-30 <br>name : FastBee Argentina S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[72] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[73] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28034 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-01-26 <br>name : Toyota Argentina S.A. <br>IP_prefix_counter : 1 <br>city :  Zarate <br>country : AR <br>max_latitude : -34.098099 <br>max_longtitude : -59.028599 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[73] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[74] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28037 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-02-02 <br>name : Alpha 2000 Soluciones Infomaticas SRL <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[74] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[75] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28038 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-02-11 <br>name : SAN LUIS CTV S.A. <br>IP_prefix_counter : 5 <br>city :  San Luis <br>country : AR <br>max_latitude : -33.294998 <br>max_longtitude : -66.335602 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[75] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[76] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28048 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-03-31 <br>name : Internet Para Todos - Gobierno de La Rioja <br>IP_prefix_counter : 3 <br>city :  La Rioja <br>country : AR <br>max_latitude : -29.410999 <br>max_longtitude : -66.8507 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[76] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[77] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28051 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-04-06 <br>name : Coop. Telefónica y de obras y serv. públic <br>IP_prefix_counter : 1 <br>city :  Jauregui <br>country : AR <br>max_latitude : -34.597401 <br>max_longtitude : -59.177799 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[77] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[78] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28065 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-07-03 <br>name : CITARELLA S.A. <br>IP_prefix_counter : 1 <br>city :  La Plata <br>country : AR <br>max_latitude : -34.921501 <br>max_longtitude : -57.954498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[78] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[79] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28068 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-07-22 <br>name : Universidad Nacional de San Luis <br>IP_prefix_counter : 1 <br>city :  San Luis <br>country : AR <br>max_latitude : -33.294998 <br>max_longtitude : -66.335602 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[79] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[80] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28075 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-08-04 <br>name : ARLINK S.A. <br>IP_prefix_counter : 3 <br>city :  Mendoza <br>country : AR <br>max_latitude : -32.8908 <br>max_longtitude : -68.827202 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[80] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[81] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28080 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-08-26 <br>name : Interredes S.A. <br>IP_prefix_counter : 1 <br>city :  San Juan <br>country : AR <br>max_latitude : -31.5375 <br>max_longtitude : -68.5364 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[81] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[82] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28090 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-11-04 <br>name : Elektra de Argentina S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[82] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[83] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 28093 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-11-04 <br>name : Cooperativa de Electricidad y Servicios Publ <br>IP_prefix_counter : 2 <br>city :  Arroyito <br>country : AR <br>max_latitude : -31.4202 <br>max_longtitude : -63.049999 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[83] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[84] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28100 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-11-30 <br>name : Cooperativa Villa del Rosario (Coovilros) <br>IP_prefix_counter : 2 <br>city :  Villa Del Rosario <br>country : AR <br>max_latitude : -31.556601 <br>max_longtitude : -63.5345 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[84] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[85] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 28101 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-12-01 <br>name : NC IT SRL <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[85] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[86] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28107 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2009-12-14 <br>name : UNIVERSIDAD NACIONAL DE SAN JUAN <br>IP_prefix_counter : 2 <br>city :  San Juan <br>country : AR <br>max_latitude : -31.5375 <br>max_longtitude : -68.5364 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[86] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[87] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 28117 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-02-10 <br>name : Crisil Irevna Argentina S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[87] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[88] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52235 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-04-09 <br>name : NetLP SRL <br>IP_prefix_counter : 1 <br>city :  La Plata <br>country : AR <br>max_latitude : -34.921501 <br>max_longtitude : -57.954498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[88] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[89] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52239 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-04-28 <br>name : Desarrollos Digitales de Pulsar Consulting <br>IP_prefix_counter : 1 <br>city :  San Isidro <br>country : AR <br>max_latitude : -34.471401 <br>max_longtitude : -58.507801 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[89] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[90] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52240 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-04-23 <br>name : Ministerio de Trabajo, Empleo y Seguridad So <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[90] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[91] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52255 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-06-07 <br>name : Grupo Servicios Junin S.A. <br>IP_prefix_counter : 1 <br>city :  Junin <br>country : AR <br>max_latitude : -34.583801 <br>max_longtitude : -60.943298 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[91] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[92] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 52271 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-08-12 <br>name : Coop. Energía Elect. y Otros Servicios Las <br>IP_prefix_counter : 1 <br>city :  Las Varillas <br>country : AR <br>max_latitude : -31.872101 <br>max_longtitude : -62.719501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[92] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[93] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 52273 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-08-19 <br>name : Loop Coronel Suarez S.A. <br>IP_prefix_counter : 1 <br>city :  Coronel Suarez <br>country : AR <br>max_latitude : -37.4547 <br>max_longtitude : -61.933399 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[93] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[94] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52275 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-08-20 <br>name : Anura S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[94] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[95] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52283 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-10-13 <br>name : Aginet SA <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[95] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[96] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52290 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-10-21 <br>name : PCCP S.A. <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[96] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[97] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 52291 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-10-27 <br>name : Coop. Provincia de Serv. Publicos y Comunita <br>IP_prefix_counter : 1 <br>city :  Neuquen <br>country : AR <br>max_latitude : -38.951599 <br>max_longtitude : -68.059097 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[97] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[98] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 52293 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-11-03 <br>name : Gobierno de Santa Fe <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[98] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[99] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 52295 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-11-11 <br>name : Coop Eléctrica, Serv Publicos, Vivienda Jua <br>IP_prefix_counter : 1 <br>city :  Fernandez <br>country : AR <br>max_latitude : -27.920401 <br>max_longtitude : -63.893501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[99] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[100] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 52296 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-11-18 <br>name : Trynet S.R.L. <br>IP_prefix_counter : 1 <br>city :  Santa Fe <br>country : AR <br>max_latitude : -31.629499 <br>max_longtitude : -60.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[100] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[101] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52300 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-12-02 <br>name : Internet Local <br>IP_prefix_counter : 1 <br>city :  Canuelas <br>country : AR <br>max_latitude : -35.0518 <br>max_longtitude : -58.760601 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[101] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[102] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 52303 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2010-12-23 <br>name : COOP.DE OB.Y SERVICIOS PUB. DE MARCOS JUAREZ <br>IP_prefix_counter : 1 <br>city :  Cordoba <br>country : AR <br>max_latitude : -31.4135 <br>max_longtitude : -64.181099 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[102] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[103] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52314 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-02-07 <br>name : Universidad Nacional del Noroeste de Buenos <br>IP_prefix_counter : 2 <br>city :  Junin <br>country : AR <br>max_latitude : -34.583801 <br>max_longtitude : -60.943298 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[103] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[104] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52317 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-03-10 <br>name : Internet Winds AG <br>IP_prefix_counter : 1 <br>city :  La Plata <br>country : AR <br>max_latitude : -34.921501 <br>max_longtitude : -57.954498 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[104] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[105] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52318 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-03-11 <br>name : Agencia de Sistemas de Informacion, Gobierno <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[105] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[106] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 52321 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-04-18 <br>name : Fideicomiso de Administración Datacenter Ca <br>IP_prefix_counter : 1 <br>city :  Cordoba <br>country : AR <br>max_latitude : -31.4135 <br>max_longtitude : -64.181099 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[106] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[107] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 2 <br>id : 52322 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-05-04 <br>name : TELCOCOM <br>IP_prefix_counter : 1 <br>city :  Ingeniero Huergo <br>country : AR <br>max_latitude : -39.083302 <br>max_longtitude : -67.233299 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[107] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[108] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 52328 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-06-15 <br>name : CABLETEL SA <br>IP_prefix_counter : 1 <br>city :  Arteaga <br>country : AR <br>max_latitude : -33.087898 <br>max_longtitude : -61.790001 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[108] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[109] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52339 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-08-15 <br>name : Lima Video Cable S.A. (Cabletel) <br>IP_prefix_counter : 3 <br>city :  Zarate <br>country : AR <br>max_latitude : -34.098099 <br>max_longtitude : -59.028599 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[109] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[110] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52346 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-09-20 <br>name : Diveo Argentina <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[110] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[111] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52348 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-10-18 <br>name : Cooperativa Eléctrica Antonio Carboni Ltda <br>IP_prefix_counter : 2 <br>city :  Carboni <br>country : AR <br>max_latitude : -35.201302 <br>max_longtitude : -59.3437 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[111] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[112] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52349 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-10-19 <br>name : Young S.A. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[112] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[113] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52350 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-10-26 <br>name : Cooperativa de Electricidad, Obras y Servici <br>IP_prefix_counter : 1 <br>city :  Suipacha <br>country : AR <br>max_latitude : -34.77 <br>max_longtitude : -59.689602 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[113] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[114] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 52351 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-10-31 <br>name : Integral Insumos <br>IP_prefix_counter : 1 <br>city :  Sunchales <br>country : AR <br>max_latitude : -30.944 <br>max_longtitude : -61.561501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[114] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[115] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 5 <br>id : 52352 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-11-01 <br>name : TVC5 S.A. <br>IP_prefix_counter : 1 <br>city :  Mar De Ajo <br>country : AR <br>max_latitude : -36.7243 <br>max_longtitude : -56.677101 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[115] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[116] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 5 <br>id : 52354 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-11-18 <br>name : Atlantica Video Cable S.A. <br>IP_prefix_counter : 1 <br>city :  Santa Teresita <br>country : AR <br>max_latitude : -36.541302 <br>max_longtitude : -56.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[116] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[117] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52357 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-01-05 <br>name : INTERSERVICES MANAGEMENT COMPANY Ltd. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[117] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[118] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 52361 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-02-29 <br>name : ARSAT - Empresa Argentina de Soluciones Sate <br>IP_prefix_counter : 2 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[118] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[119] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52363 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-03-09 <br>name : Jumpnet Soluciones de Internet S.R.L. <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[119] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[120] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 52367 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-03-20 <br>name : COOP. LIMITADA DE CONSUMO DE ELECTRICIDAD DE <br>IP_prefix_counter : 1 <br>city :  Salto <br>country : AR <br>max_latitude : -34.2929 <br>max_longtitude : -60.254601 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[120] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[121] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 52372 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-05-24 <br>name : COOPERATIVA ELECTRICA DE GENERAL DEHEZA LTDA <br>IP_prefix_counter : 2 <br>city :  General Deheza <br>country : AR <br>max_latitude : -32.756599 <br>max_longtitude : -63.786098 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[121] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[122] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 262170 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-07-19 <br>name : Visualhosting.net <br>IP_prefix_counter : 2 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[122] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[123] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 262174 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-08-08 <br>name : NEURALSOFT S.R.L. <br>IP_prefix_counter : 2 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[123] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[124] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 1 <br>id : 262189 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-09-27 <br>name : Cooperativa Regional de Servicios <br>IP_prefix_counter : 1 <br>city :  Santa Fe <br>country : AR <br>max_latitude : -31.629499 <br>max_longtitude : -60.701 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[124] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[125] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 262192 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-11-22 <br>name : Skycorp S.A. <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[125] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[126] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 4 <br>id : 262201 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2011-11-24 <br>name : BANCO HIPOTECARIO SOCIEDAD ANONIMA <br>IP_prefix_counter : 1 <br>city :  N/A <br>country : AR <br>max_latitude : -34 <br>max_longtitude : -64 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[126] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[127] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 3 <br>id : 262216 <br>reg_country : AR <br>registry : lacnic <br>date_of_registration : 2012-02-02 <br>name : TELCONET S A <br>IP_prefix_counter : 1 <br>city :  Buenos Aires <br>country : AR <br>max_latitude : -34.587502 <br>max_longtitude : -58.672501 <br>distance : 0 <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[127] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[128] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 100 <br>id : NA <br>reg_country : NA <br>registry : NA <br>date_of_registration : NA <br>name : NA <br>IP_prefix_counter : NA <br>city : NA <br>country : NA <br>max_latitude : -31.453093375 <br>max_longtitude : -61.115774875 <br>distance : NA <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[128] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[129] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 200 <br>id : NA <br>reg_country : NA <br>registry : NA <br>date_of_registration : NA <br>name : NA <br>IP_prefix_counter : NA <br>city : NA <br>country : NA <br>max_latitude : -38.29625 <br>max_longtitude : -65.3067656666667 <br>distance : NA <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[129] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[130] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 300 <br>id : NA <br>reg_country : NA <br>registry : NA <br>date_of_registration : NA <br>name : NA <br>IP_prefix_counter : NA <br>city : NA <br>country : NA <br>max_latitude : -34.59935778125 <br>max_longtitude : -58.7620301875 <br>distance : NA <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[130] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[131] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 400 <br>id : NA <br>reg_country : NA <br>registry : NA <br>date_of_registration : NA <br>name : NA <br>IP_prefix_counter : NA <br>city : NA <br>country : NA <br>max_latitude : -33.1516604210526 <br>max_longtitude : -64.8750291052632 <br>distance : NA <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[131] )});   
+
+  var infowindow = new google.maps.InfoWindow({ content: "",
+                                                        position:event.latLng, disableAutoPan:false, maxWidth :330, pixelOffset :null  }); 
+ google.maps.event.addListener(markerstemp2060[132] ,"click",function(event){ 
+ infowindow.content="cl$cluster : 500 <br>id : NA <br>reg_country : NA <br>registry : NA <br>date_of_registration : NA <br>name : NA <br>IP_prefix_counter : NA <br>city : NA <br>country : NA <br>max_latitude : -37.3175505 <br>max_longtitude : -57.12327475 <br>distance : NA <br>" ; 
+infowindow.position=event.latLng;
+infowindow.open(map,markerstemp2060[132] )});   
+showO(markerstemp2060,"markerstemp2060box",map);  google.maps.event.addListener(  map , 'rightclick', function(event) {
+    var lat = event.latLng.lat();
+    var lng = event.latLng.lng();
+    alert('Lat=' + lat + '; Lng=' + lng);});   
+ }
+</script> 
+ </head> 
+ <body onload="initialize()"> 
+  <div id="map_canvas"></div>  
+
+                           
+ <div id="cBoxes"> 
+<input type="checkbox" id="markerstemp2060box" onClick='boxclick(this,markerstemp2060,"markerstemp2060box",map);' /> <b>AS cluster and center<b> <hr /> 
+ <table> <tr>  <td> <input type="checkbox"  checked="checked" id="boxLegend5a4f129e4b61" onClick='legendDisplay(this,"Legend5a4f129e4b61");' /> LEGEND </td> </tr>  <tr> <td>cl$cluster</td> </tr>
+                                    <tr> <td> <div style="display:block;" id="Legend5a4f129e4b61"> <img src="Legend5a4f129e4b61.png" alt="Legend" height="70%"> </div>
+                           </td> </tr> 
+ </table> 
+  <hr> 
+ </div> 
+ </body>  
+  </html>
