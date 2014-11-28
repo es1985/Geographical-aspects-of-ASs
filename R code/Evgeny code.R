@@ -155,7 +155,7 @@ ZA_NUMBER_OF_CLUSTERS = 4
 AR_NUMBER_OF_CLUSTERS = 5
 
 #Database channel definition
-channel <- odbcConnect("AS", uid="root", pwd="c1edd62dad")
+channel <- odbcConnect("AS", uid="bla", pwd="blabla")
 
 #SQL selects choosing ASs that are both registered and geo-located in one country only
 China_one_location <- "SELECT a.*,count(a.id) as IP_prefix_counter, g.city, g.country, max(g.latitude) as max_latitude, min(g.latitude) as min_latitude, max(g.longtitude) as max_longtitude, min(g.longtitude) as min_longtitude, sqrt(pow(sqrt(pow(max(g.latitude)-min(g.latitude),2)),2)  +pow(sqrt(pow(max(g.longtitude)-min(g.longtitude),2)),2)) as distance FROM IP_GEO as g LEFT JOIN IP_AS as i ON g.ip=i.ip JOIN AS.AS as a ON i.as_id=a.id WHERE (a.reg_country = 'CN' and g.country = 'CN') GROUP BY a.id HAVING distance = 0;"
