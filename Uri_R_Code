@@ -1,0 +1,721 @@
+library(igraph)
+
+APINIC<-read.table("Data Management/APINIC.csv", header = TRUE, sep = ",", skip = 0,quote = "",strip.white=TRUE,allowEscapes=TRUE, flush=TRUE, fill=TRUE)
+AFRINIC<-read.table("Data Management/AFRINIC.csv", header = TRUE, sep = "|", skip = 0,quote = "",na.strings = "NA", fill=TRUE)
+ARIN<-read.table("Data Management/ARIN.csv", header = TRUE, sep = "|", skip = 0,quote = "", fill=TRUE)
+LACNIC<-read.table("Data Management/LACNIC.csv", header = TRUE, sep = "|", skip = 0,quote = "", fill=TRUE)
+RIPE<-read.table("Data Management/RIPE.csv", header = TRUE, sep = ",", skip = 0,quote = "", fill=TRUE)
+
+RIPE_outliers<-read.table("Data Management/RIPE_outliers.csv", header = TRUE, sep = "|", skip = 0,quote = "",colClasses = "character",na.strings = "NA      ", fill=TRUE)
+APINIC_outliers<-read.table("Data Management/APINIC_outliers.csv", header = TRUE, sep = ",", skip = 0,quote = "",strip.white=TRUE,allowEscapes=TRUE, flush=TRUE,na.strings = "NA", fill=TRUE)
+AFRINIC_outliers<-read.table("Data Management/AFRINIC_outliers.csv", header = TRUE, sep = "|", skip = 0,quote = "",na.strings = "NA", fill=TRUE)
+ARIN_outliers<-read.table("Data Management/ARIN_outliers.csv", header = TRUE, sep = "|",na.strings = "NA", skip = 0,quote = "", fill=TRUE)
+LACNIC_outliers<-read.table("Data Management/LACNIC_outliers.csv", header = TRUE, sep = "|",na.strings = "NA", skip = 0,quote = "", fill=TRUE)
+
+
+
+connections<-read.table("Data Management/Dataset_2012.csv", header = TRUE, sep = ",", skip = 0)
+
+isos<-read.table("Data Management/iso2.csv", header = FALSE, sep = ",",na.strings="",  skip = 0)
+
+# ------ ISO Transformation
+
+three2two<-data.frame(isos["V1"],stringsAsFactors=FALSE)
+row.names(three2two)<-t(isos["V2"])
+three2two
+
+two2three<-data.frame(isos["V2"],stringsAsFactors=FALSE)
+row.names(two2three)<-t(isos["V1"])
+two2three
+
+#-------
+
+ip_geo_asn <- function(ip_frame) 
+  {
+  asn_vec<-numeric(0)
+  lat_vec<-numeric(0)
+  long_vec<-numeric(0)
+  ip_times<-numeric(0)
+  country<-character(0)
+for(i in seq(1:nrow(ip_frame))) 
+{
+  current_asn<-as.numeric(as.character(ip_frame[i,"AS.number"]))
+  if(!is.na(current_asn))
+  {
+      if (!(current_asn %in% asn_vec))
+      {
+        asn_vec[length(asn_vec)+1]<-as.numeric(as.character(ip_frame[i,"AS.number"])) 
+        lat_vec[length(lat_vec)+1]<-0
+        long_vec[length(long_vec)+1]<-0
+        ip_times[length(ip_times)+1]<-0 
+        
+        country[length(country)+1]<-as.character(ip_frame[i,"AS.country.code"])
+      }
+  
+        lat_vec[length(lat_vec)]<-(lat_vec[length(lat_vec)]*ip_times[length(ip_times)]+as.numeric(as.character(RIPE[i,"Lattitude"])))/(ip_times[length(ip_times)]+1)
+        long_vec[length(long_vec)]<-(long_vec[length(long_vec)]*ip_times[length(ip_times)]+as.numeric(as.character(RIPE[i,"Longtitude"])))/(ip_times[length(ip_times)]+1)
+        ip_times[length(ip_times)]<-ip_times[length(ip_times)]+1
+  }
+}
+  df <- data.frame(asn_vec, lat_vec, long_vec,ip_times, country, stringsAsFactors=FALSE)
+  return(df)
+}
+  
+is_connected_left_right <- function(left, right, connections_matrix)
+{
+  give_back<-FALSE
+  place<- match(left,t(connections_matrix[1]))
+  if (!(is.na(place)))
+  {
+    i<-0
+   while (connections_matrix[place+i,1]==left)
+   {
+     if (connections_matrix[place+i,2]==right)
+     {
+       give_back<-TRUE
+       break
+     }
+     i<-i+1
+   }
+  }
+  return(give_back)
+}
+
+is_connected <- function(left, right, connections_matrix)
+{
+  give_back<-FALSE
+  if (is_connected_left_right(left, right, connections_matrix))
+  {give_back<-TRUE}
+  else
+  {
+    if (is_connected_left_right(right, left, connections_matrix))
+    {give_back<-TRUE}
+  }
+  return(give_back)
+}
+
+
+make_mega_table <- function(dist_matrix,connect_matrix) 
+{
+  connections_vec<-numeric(0)
+  dist_vec<-numeric(0)
+  ip_av_vec<-numeric(0)
+  
+  for(i in seq(1:nrow(dist_matrix)))
+  {
+    for(j in seq(1:nrow(dist_matrix))) 
+    {
+      if (i!=j)
+      {
+       
+        if(is_connected(dist_matrix[i,"asn_vec"],dist_matrix[j,"asn_vec"],connect_matrix)) 
+       { connections_vec[length(connections_vec)+1]<-1 }
+       else
+       { connections_vec[length(connections_vec)+1]<-0 }
+       
+        lat1<-dist_matrix[i,"lat_vec"]
+        lat2<-dist_matrix[j,"lat_vec"]
+        long1<-dist_matrix[j,"long_vec"]
+        long2<-dist_matrix[j,"long_vec"]
+        
+        dist_vec[length(dist_vec)+1]<- sqrt((lat1-lat2)^2 + (long1-long2)^2 )
+        
+        ip_av_vec[length(ip_av_vec)+1]<-(dist_matrix[i,"ip_times"] + dist_matrix[j,"ip_times"])/2
+      }
+    }
+  }
+  df <- data.frame(connections_vec, dist_vec, ip_av_vec, stringsAsFactors=FALSE) 
+  return (df)
+}
+
+# ----------------------- Functions After Sending once -------------------------
+
+
+country_sift <- function(dist_matrix) 
+{
+  times_vec<-numeric(0)
+  country_vec<-character(0) 
+  
+  for(i in seq(1:nrow(dist_matrix))) 
+  {
+    code<-as.character(dist_matrix[i,"country"])
+    if (code %in% country_vec)
+    {
+      indx<-match(code,country_vec)
+      times_vec[indx]<-times_vec[indx]+1
+    }
+    else
+    {
+      country_vec[length(country_vec)+1]<-code 
+      times_vec[length(times_vec)+1]<-1
+    }
+  }
+  df<-data.frame(country_vec, times_vec, stringsAsFactors=FALSE)
+  return(df)
+}
+
+smaller_than <- function(c_list, number) 
+{
+  times_vec<-numeric(0)
+  country_vec<-character(0) 
+  
+  for(i in seq(1:nrow(c_list))) 
+  {
+    if (c_list["country_vec"]<=number)
+    {
+    country_vec[length(country_vec)+1]<-c_list["country_vec"] 
+    times_vec[length(times_vec)+1]<-c_list["times_vec"] 
+    }
+  }
+  df<-data.frame(country_vec, times_vec, stringsAsFactors=FALSE)
+  return(df)
+}
+
+
+
+
+ip_geo_asn2 <- function(ip_frame, country_vec_name, lat_vec_name, long_vec_name) 
+{
+  asn_vec<-numeric(0)
+  lat_vec<-numeric(0)
+  long_vec<-numeric(0)
+  ip_times<-numeric(0)
+  country<-character(0)
+
+  #seq(1:nrow(ip_frame)
+  for(i in seq(1:nrow(ip_frame)))
+  {
+    current_asn<-as.numeric(as.character(ip_frame[i,"AS.number"]))
+    current_lat<-as.numeric(as.character(ip_frame[i,lat_vec_name]))
+    current_long<-as.numeric(as.character(ip_frame[i,long_vec_name]))
+    
+    if(isTRUE(!is.na(current_asn) && !is.na(current_lat) && !is.na(current_long)))
+    {
+      if (!(current_asn %in% asn_vec))
+      {
+        asn_vec[length(asn_vec)+1]<-as.numeric(as.character(ip_frame[i,"AS.number"])) 
+        lat_vec[length(lat_vec)+1]<-0
+        long_vec[length(long_vec)+1]<-0
+        ip_times[length(ip_times)+1]<-0 
+        
+        country[length(country)+1]<-as.character(ip_frame[i,country_vec_name])
+      }
+      
+      lat_vec[length(lat_vec)]<-(lat_vec[length(lat_vec)]*ip_times[length(ip_times)] +as.numeric(as.character(ip_frame[i,lat_vec_name])))/(ip_times[length(ip_times)]+1)
+      long_vec[length(long_vec)]<-(long_vec[length(long_vec)]*ip_times[length(ip_times)]+as.numeric(as.character(ip_frame[i,long_vec_name])))/(ip_times[length(ip_times)]+1)
+      ip_times[length(ip_times)]<-ip_times[length(ip_times)]+1
+    }
+  }
+  df <- data.frame(asn_vec, long_vec, lat_vec, ip_times, country, stringsAsFactors=FALSE)
+  return(df)
+}
+
+narrow_to_country <- function(dist_matrix, country_vec_name, country_name) 
+{
+  asn_vec<-numeric(0)
+  lat_vec<-numeric(0)
+  long_vec<-numeric(0)
+  ip_times<-numeric(0)
+  country<-character(0)
+  
+  for(i in seq(1:nrow(dist_matrix)))
+  {
+    is_country<-dist_matrix[i,"country"]==country_name
+if(isTRUE(is_country)){
+{
+  asn_vec[length(asn_vec)+1]<-dist_matrix[i,"asn_vec"]
+  lat_vec[length(lat_vec)+1]<-dist_matrix[i,"lat_vec"]
+  long_vec[length(long_vec)+1]<-dist_matrix[i,"long_vec"]  
+  ip_times[length(ip_times)+1]<-dist_matrix[i,"ip_times"]
+  country[length(country)+1]<-dist_matrix[i,"country"] 
+}
+}
+  }
+  df <- data.frame(asn_vec, long_vec, lat_vec, ip_times, country, stringsAsFactors=FALSE)
+  return(df) 
+}
+
+prepare_reg <- function(dist_matrix, country_vec_name, country_name,connect_matrix) 
+{
+  only_country<-narrow_to_country(dist_matrix,country_vec_name,country_name)
+  
+  for_reg<-make_mega_table(only_country,connect_matrix)
+  
+  return(for_reg)
+}
+
+
+
+
+# ----------------------- Functions Above -------------------------
+connects<-data.frame(connections["AS.number"],connections["AS.connected.to"])
+connects
+
+ripe_dists<-ip_geo_asn(RIPE)
+
+afrinic_dists<-ip_geo_asn2(AFRINIC,"AS.Country.Code", "Latitude","Longtitude")
+
+arin_dists<-ip_geo_asn2(ARIN,"AS.Country.Code","Latitude","Longtitude")
+
+lacnic_dists<-ip_geo_asn2(LACNIC,"AS.Country.Code", "Latitude","Longtitude")
+
+apinic_dists<-ip_geo_asn2(APINIC,"AS.country", "Lattitude","Longtitude")
+
+apinic_list<-country_sift(apinic_dists)
+
+ripe_list<-country_sift(ripe_dists)
+
+afrinic_list<-country_sift(afrinic_dists)
+
+arin_list<-country_sift(arin_dists)
+
+lacnic_list<-country_sift(lacnic_dists)
+
+
+# ------- South Africa
+
+only_sa<-narrow_to_country(afrinic_dists,"country","ZA")
+
+sa_for_reg<-make_mega_table(only_sa,connects)
+
+res_sa=lm(connections_vec~dist_vec+ip_av_vec, data=sa_for_reg)
+
+res_sa
+
+
+# ------- Egypt
+
+only_eg<-narrow_to_country(afrinic_dists,"country","EG")
+
+eg_for_reg<-make_mega_table(only_eg,connects)
+
+res_eg=lm(connections_vec~dist_vec+ip_av_vec, data=eg_for_reg)
+
+res_eg
+
+
+# ---- Ghana
+
+gh_for_reg<-prepare_reg(afrinic_dists,"country","GH",connects)
+
+res_gh=lm(connections_vec~dist_vec+ip_av_vec, data=gh_for_reg)
+
+res_gh
+
+# ---- Nigeria
+
+ng_for_reg<-prepare_reg(afrinic_dists,"country","NG",connects)
+
+res_ng=lm(connections_vec~dist_vec+ip_av_vec, data=ng_for_reg)
+
+res_ng
+
+
+# ---- Kenya
+
+ke_for_reg<-prepare_reg(afrinic_dists,"country","KE",connects)
+
+res_ke=lm(connections_vec~dist_vec+ip_av_vec, data=ke_for_reg)
+
+res_ke
+
+
+# ---- Denmark
+
+dk_for_reg<-prepare_reg(ripe_dists,"country","DK",connects)
+
+res_dk=lm(connections_vec~dist_vec+ip_av_vec, data=dk_for_reg)
+
+res_dk
+
+
+# ---- Latvia
+
+lv_for_reg<-prepare_reg(ripe_dists,"country","LV",connects)
+
+res_lv=lm(connections_vec~dist_vec+ip_av_vec, data=lv_for_reg)
+
+res_lv
+
+
+# ---- France
+
+fr_for_reg<-prepare_reg(ripe_dists,"country","FR",connects)
+
+res_fr=lm(connections_vec~dist_vec+ip_av_vec, data=fr_for_reg)
+
+res_fr
+
+
+
+# ------ Country interconnectedness and stuff
+
+
+
+count_AS_per_country <- function(country,country_connects)
+{
+  numbers_in_country<-numeric(0)
+  number_incountry<-0
+  
+  for(i in seq(1:nrow(country_connects)))
+  {
+    current_country0<-as.character(country_connects[i,"COUNTRY"])
+    current_country0<-gsub(" ","",current_country0)
+    current_AS0<-country_connects[i,"AS.number"]
+    
+    current_country1<-as.character(country_connects[i,"COUNTRY.1"])
+    current_country1<-gsub(" ","",current_country1)
+    current_AS1<-country_connects[i,"AS.connected.to"]
+    
+    if(!(current_AS0 %in% numbers_in_country) && current_country0==country)
+    {
+      numbers_in_country[length(numbers_in_country)+1]<-current_AS0
+      number_incountry<-number_incountry+1
+    }
+    
+    if(!(current_AS1 %in% numbers_in_country) && current_country1==country)
+    {
+      numbers_in_country[length(numbers_in_country)+1]<-current_AS1
+      number_incountry<-number_incountry+1
+    }
+  }
+  return(number_incountry)
+}
+
+as_in_countries<- function(country_vec , country_connects)
+{
+  as_times<-numeric(length(country_vec))
+  df<-data.frame(country_vec,as_times)
+  row.names(df)<-country_vec
+  
+  as_numbers_used<-numeric(0)
+  
+  for(i in seq(1:nrow(country_connects)))
+  {
+    current_country0<-as.character(country_connects[i,"COUNTRY"])
+    current_country0<-gsub(" ","",current_country0)
+    current_AS0<-country_connects[i,"AS.number"]
+    
+    current_country1<-as.character(country_connects[i,"COUNTRY.1"])
+    current_country1<-gsub(" ","",current_country1)
+    current_AS1<-country_connects[i,"AS.connected.to"]
+    
+    
+    if(!(current_AS0 %in% as_numbers_used) && (current_country0 %in% country_vec))
+    {
+      as_numbers_used[length(as_numbers_used)+1]<-current_AS0
+      # return(df[current_country0,"as_times"])
+      df[current_country0,"as_times"]<-df[current_country0,"as_times"]+1
+    }
+    
+    if(!(current_AS1 %in% as_numbers_used) && (current_country1 %in% country_vec))
+    {
+      as_numbers_used[length(as_numbers_used)+1]<-current_AS1
+      df[current_country1,"as_times"]<-df[current_country1,"as_times"]+1
+    }
+  
+  }
+  return(df)
+}
+
+
+#--------- Functions end
+
+
+codes<-read.table("Data Management/Country codes.csv", header = TRUE, sep = ";", skip = 0)
+country_data<-read.table("Data Management/WEOApr2013all.csv", header = TRUE, sep =":", fill=TRUE, skip=0, blank.lines.skip = FALSE)
+
+country_vector<-numeric(0)
+for(i in seq(1:nrow(connections)))
+{
+  country0<-as.character(connections[i,"COUNTRY"])
+  country0<-gsub(" ","",country0)
+  
+  country1<-as.character(connections[i,"COUNTRY.1"])
+  country1<-gsub(" ","",country1)
+  
+  if (country0  %in% country_vector)
+  {}
+  else if(country0=="")
+  {}
+  else
+  {
+    country_vector<-c(country_vector,country0)
+  }
+  
+  if (country1  %in% country_vector)
+  {}
+  else if(country1=="")
+  {}
+  else
+  {
+    country_vector<-c(country_vector,country1)
+  }
+}
+
+#-------- stuff begins 
+
+
+# -- prepare indices for regressions: Functions begin
+
+make_data_table <- function(country_frame,wb_frame,data_vec,data_names,year_col)
+{
+  if (length(data_vec)!=length(data_names))
+  {return(FALSE)}
+  
+  for(i in seq(1:length(data_vec)))
+  {
+    country_frame[data_names[i]]<-numeric(nrow(country_frame))
+    
+    for(j in seq(1:nrow(wb_frame)))
+    {
+      current_subject<-as.character(wb_frame[j,"WEO.Subject.Code"])
+      if(current_subject==data_vec[i])
+      {
+        current_country<-as.character(three2two[as.character(wb_frame[j,"ISO"]),"V1"])
+        if(current_country %in% row.names(country_frame))
+        {
+          #return(current_country)
+          country_frame[current_country,data_names[i]]<-wb_frame[j,year_col]
+        }   
+      }
+    }    
+  }
+  
+  return(country_frame)  
+}
+
+#------- stuff
+
+row.names(country_interconnectedness)<-country_interconnectedness[,"ISO3V10"]
+
+colSums(country_connections)[3]
+
+country_interconnectedness[,"Connections"]
+
+how_many<-as_in_countries(country_vector,connections)
+how_many
+row.names(how_many)
+
+subjcs<-c("TM_RPCH","TX_RPCH","NGDPDPC","GGX_NGDP","NID_NGDP","LP")
+sbjct_names<-c("imports2012","exports2012","GDP2012","government2012","investment2012","population2012")
+
+regtable_rough<-make_data_table(how_many,country_data,subjcs,sbjct_names,"X2012")
+
+regtable_rough["interconnectivity"]<-country_interconnectedness[,"Connections"]
+regtable_rough["outward_connectivity"]<-colSums(country_connections)
+
+regtable_rough[1,"interconnectivity"]
+
+regtable<-subset(regtable_rough, population2012!=0)
+
+regtable["inter_index"]<-numeric(nrow(regtable))
+regtable["imp_exp"]<-numeric(nrow(regtable))
+
+
+for (i in seq(1:nrow(regtable)))
+{
+  regtable[i,"inter_index"]<-as.numeric(regtable[i,"interconnectivity"])/as.numeric(regtable[i,"as_times"])
+  regtable[i,"imp_exp"]<-as.numeric(regtable[i,"imports2012"])+as.numeric(regtable[i,"exports2012"])
+}
+
+reg_outerconnect_trade<-lm(outward_connectivity~imp_exp, data=regtable)
+
+reg_outerconnect_trade
+
+reg_asnum<-lm(as_times~GDP2012+population2012+investment2012+government2012, data=regtable)
+
+reg_asnum
+
+reg_index<-lm(inter_index~GDP2012+population2012+investment2012+government2012, data=regtable)
+
+reg_index
+
+reg_interconnect<-lm(interconnectivity~GDP2012+population2012+investment2012+government2012, data=regtable)
+
+reg_interconnect
+
+
+
+#----- Outliers: functions
+
+
+outlier_arrange <- function(country_vec,outlier_table)
+{
+  zong<-numeric(length(country_vector))
+  tab<-data.frame(zong)
+  colnames(tab)<-country_vec[1]
+  for (i in seq(2:length(country_vec)))
+  {
+    tab[country_vec[i]]<-numeric(length(country_vector))
+  }
+  
+  row.names(tab)<-country_vec
+  
+  for(i in seq(1:nrow(outlier_table)))
+  {
+    if (!is.na(outlier_table[i,"AS.number"]))
+    {  
+      ascountry<-as.character(outlier_table[i,"AS.country.code"])
+      ipcountry<-as.character(outlier_table[i,"IP.country"])
+      a<-tab[ascountry,ipcountry]+1
+      tab[ascountry,ipcountry]<-a
+    }
+  }  
+  
+  return(tab)
+}
+
+fuckin_shit <- function(number)
+{
+  another<-number+1
+  return(another)
+}
+
+#---- stuff:
+
+ripe_out_connects<-outlier_arrange(country_vector,RIPE_outliers)
+
+ripe_out_connects
+
+# ------------ NOT USED: ALL UP THERE
+
+# ------------ And now: Graphs?
+
+g<-graph.adjacency(country_connections, weighted=TRUE, diag=FALSE, mode="undirected")
+
+plot(g, layout=layout.reingold.tilford, vertex.size=1,vertex.label.dist=0.5, vertex.color="red", edge.arrow.size=1)
+
+
+
+
+
+
+
+colnames(df)<-"kkk"
+
+df
+
+regtable[4,"outward_connectivity"]+1
+regtable[4,"imp_exp"]+1
+
+
+
+as.numeric(regtable["ES","exports2012"])
+
+
+
+nrow(newdata)
+regtable[1,]
+
+
+regtable
+
+length(sbjct_names)
+
+sbjct_names[2]
+
+as.character(country_data[3,"ISO"])
+three2two
+two2three["PR",]
+
+"PRI" %in% country_data["ISO"]
+bla<-numeric(length(country_vector))
+
+bla2<-data.frame(bla,country_vector)
+
+row.names(bla2)<-country_vector
+connections
+bla2
+
+how_many["GG","as_times"]+1
+as.character(connections[1,"COUNTRY"])
+
+
+gsub(" ","",as.character(connections[1,"COUNTRY"]))
+
+
+
+
+
+
+
+
+
+
+
+isTRUE(afrinic_dists[1,"country"]=="NG")
+
+smaller_list<-smaller_than(country_list,400)
+
+nrow(country_list)
+
+
+
+
+
+boing <-ripe_dists [1:10,]
+
+boing
+
+start.time <- Sys.time()
+mega_mega<-make_mega_table(boing,connects)
+end.time <- Sys.time()
+time.taken <- start.time - end.time
+
+time.taken
+
+mega_mega
+
+
+"SS" %in% t(ripe_dists["country"])
+
+hhh<-numeric(0)
+length(hhh)
+
+hhh
+
+
+try
+bla<-ip_geo_asn(APINIC)
+bla
+
+nrow(try)
+
+
+
+
+connects
+
+look<-c(0,5)
+
+look2<-t(look)
+
+look %in% t(connects)
+
+match(look,t(connects))
+
+match(701,connections["AS.number"])
+
+)
+connections[1,"AS.number"]
+
+v <- c(1,2,3,4)
+3 %in% v
+match('b',v)
+v
+
+sqrt(216000)
+countries<-character(0)
+countries
+
+a<-c('s','t','y')
+b<-c('r','u', 'f')
+d<-c('t','y','h')
+try<-list(a,b,d)
+try
+try[[length(try)+1]] <- d
+df <- data.frame(a, b, d, stringsAsFactors=FALSE)
+gok<-c('i','i','i')
+df[1,1]
+df <- rbind(df,go)
